@@ -233,7 +233,8 @@ class Democratic extends Tmp_Playlist
 
         $sql = 'SELECT `tmp_playlist_data`.`object_type`, ' .
             '`tmp_playlist_data`.`object_id`, ' .
-            '`tmp_playlist_data`.`id` ' .
+            '`tmp_playlist_data`.`id`, ' .
+            '`tmp_playlist_data`.`added_by` ' .
             'FROM `tmp_playlist_data` INNER JOIN `user_vote` ' .
             'ON `user_vote`.`object_id` = `tmp_playlist_data`.`id` ' .
             "WHERE `tmp_playlist_data`.`tmp_playlist` = '" .
@@ -409,9 +410,9 @@ class Democratic extends Tmp_Playlist
 
         /* If it's not there, add it and pull ID */
         if (!$results = Dba::fetch_assoc($db_results)) {
-            $sql = "INSERT INTO `tmp_playlist_data` (`tmp_playlist`,`object_id`,`object_type`,`track`) " .
-                "VALUES (?, ?, ?, ?)";
-            Dba::write($sql, array($this->tmp_playlist, $object_id, $object_type, $track));
+            $sql = "INSERT INTO `tmp_playlist_data` (`tmp_playlist`,`object_id`,`object_type`,`track`,`added_by`) " .
+                "VALUES (?, ?, ?, ?, ?)";
+            Dba::write($sql, array($this->tmp_playlist, $object_id, $object_type, $track, $GLOBALS['user']->id));
             $results['id'] = Dba::insert_id();
         }
 
