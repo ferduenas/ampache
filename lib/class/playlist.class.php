@@ -411,9 +411,9 @@ class Playlist extends playlist_object
 
             /* Don't insert dead media */
             if ($media->id) {
-                $sql = "INSERT INTO `playlist_data` (`playlist`,`object_id`,`object_type`,`track`) " .
+                $sql = "INSERT INTO `playlist_data` (`playlist`,`object_id`,`object_type`,`track`,`added_by`) " .
                     " VALUES (?, ?, ?, ?)";
-                Dba::write($sql, array($this->id, $data['object_id'], $data['object_type'], $track));
+                Dba::write($sql, array($this->id, $data['object_id'], $data['object_type'], $track, $GLOBALS['user']->id));
             } // if valid id
         } // end foreach medias
 
