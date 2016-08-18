@@ -136,7 +136,7 @@ class Tmp_Playlist extends database_object
     public function get_items()
     {
         /* Select all objects from this playlist */
-        $sql = "SELECT `object_type`, `id`, `object_id` " .
+        $sql = "SELECT `object_type`, `id`, `object_id`, `added_by` " .
             "FROM `tmp_playlist_data` " .
             "WHERE `tmp_playlist` = ? ORDER BY `id` ASC";
         $db_results = Dba::read($sql, array($this->id));
@@ -149,6 +149,7 @@ class Tmp_Playlist extends database_object
             $items[]     = array(
                 'object_type' => $results['object_type'],
                 'object_id' => $results['object_id'],
+				'added_by' => $results['added_by'],
                 'track_id' => $results['id'],
                 'track' => $i++,
             );
@@ -305,9 +306,9 @@ class Tmp_Playlist extends database_object
     public function add_object($object_id, $object_type)
     {
         $sql = "INSERT INTO `tmp_playlist_data` " .
-            "(`object_id`,`tmp_playlist`,`object_type`) " .
-            " VALUES (?, ?, ?)";
-        Dba::write($sql, array($object_id, $this->id, $object_type));
+            "(`object_id`,`tmp_playlist`,`object_type`,`added_by`) " .
+            " VALUES (?, ?, ?, ?)";
+        Dba::write($sql, array($object_id, $this->id, $object_type, $GLOBALS['user']->id));
 
         return true;
     } // add_object

@@ -33,6 +33,7 @@ $web_path = AmpConfig::get('web_path');
   <col id="col_album" />
   <col id="col_artist" />
   <col id="col_time" />
+  <col id="col_added_by" />
   <?php if (Access::check('interface', '100')) {
     ?>
   <col id="col_admin" />
@@ -62,6 +63,7 @@ else {
         <th class="cel_album"><?php echo T_('Album'); ?></th>
         <th class="cel_artist"><?php echo T_('Artist'); ?></th>
         <th class="cel_time"><?php echo T_('Time'); ?></th>
+        <th class="cel_addedby">Added by</th>
         <?php if (Access::check('interface', '100')) {
     ?>
         <th class="cel_admin"><?php echo T_('Admin'); ?></th>
@@ -96,6 +98,10 @@ $democratic = Democratic::get_current_playlist();
     <td class="cel_album"><?php echo $media->f_album_link; ?></td>
     <td class="cel_artist"><?php echo $media->f_artist_link; ?></td>
     <td class="cel_time"><?php echo $media->f_time; ?></td>
+    <td class="cel_addedby">
+    <?php $user = User::get_from_userid($item['added_by']);?>
+    <?php echo $user->username; ?>
+    </td>
     <?php if (Access::check('interface', '100')) {
     ?>
     <td class="cel_admin">
@@ -117,9 +123,11 @@ $democratic = Democratic::get_current_playlist();
         <th class="cel_album"><?php echo T_('Album'); ?></th>
         <th class="cel_artist"><?php echo T_('Artist'); ?></th>
         <th class="cel_time"><?php echo T_('Time'); ?></th>
+        <th class="cel_addedby">Added by</th>
         <?php if (Access::check('interface', '100')) {
     ?>
         <th class="cel_admin"><?php echo T_('Admin'); ?></th>
+        <th class="cel_artist"><?php echo $item['added_by']; ?></th>
         <?php 
 } ?>
     </tr>

@@ -556,6 +556,7 @@ CREATE TABLE IF NOT EXISTS `playlist_data` (
   `object_id` int(11) unsigned DEFAULT NULL,
   `object_type` varchar(32) CHARACTER SET utf8 DEFAULT NULL,
   `track` int(11) unsigned NOT NULL DEFAULT '0',
+  `added_by` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `playlist` (`playlist`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
@@ -1073,6 +1074,7 @@ CREATE TABLE IF NOT EXISTS `tmp_playlist_data` (
   `object_type` varchar(32) CHARACTER SET utf8 DEFAULT NULL,
   `object_id` int(11) unsigned NOT NULL,
   `track` int(11) unsigned DEFAULT NULL,
+  `added_by` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `tmp_playlist` (`tmp_playlist`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;

@@ -253,6 +253,19 @@ class User extends database_object
 
         return $users;
     } // get_valid_users
+    
+    /**
+     * get_from_userid
+     * This returns a built user from an id. This is a
+     * static function so it doesn't require an instance
+     */
+    public static function get_from_userid($userid)
+    {
+    	$user = new User($userid);
+    
+    	return $user;
+    
+    } // get_from_userid
 
     /**
      * get_from_username
